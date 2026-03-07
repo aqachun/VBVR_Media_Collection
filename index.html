@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Awesome VBVR — Media & Resources Collection</title>
+  <meta name="description" content="A curated collection of media coverage, community discussions, and official resources for the VBVR project — A Very Big Video Reasoning Suite." />
+  <style>
+    /* ===== CSS Variables & Reset ===== */
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b27;
+      --bg3: #1e2535;
+      --border: #2a3450;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #6366f1;
+      --accent2: #8b5cf6;
+      --accent3: #06b6d4;
+      --gold: #f59e0b;
+      --green: #10b981;
+      --red: #ef4444;
+      --pink: #ec4899;
+      --orange: #f97316;
+      --tag-bg: #1e2535;
+      --card-hover: #1a2236;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #ffffff;
+      --bg3: #f1f5f9;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --tag-bg: #e2e8f0;
+      --card-hover: #f1f5f9;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent3); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #67e8f9; }
+
+    /* ===== Layout ===== */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    [data-theme="light"] .navbar { background: rgba(248,250,252,0.9); }
+    .navbar-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+    }
+    .navbar-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1rem; color: var(--text);
+    }
+    .navbar-brand .logo-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .navbar-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px 14px; cursor: pointer;
+      font-size: 0.8rem; color: var(--text-muted); transition: all 0.2s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+
+    /* ===== Hero ===== */
+    .hero {
+      padding: 72px 0 48px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(249,115,22,0.2));
+      border: 1px solid rgba(245,158,11,0.4);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 0.78rem; font-weight: 600; color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #e2e8f0 0%, #6366f1 50%, #8b5cf6 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .hero-subtitle-cn {
+      font-size: 0.95rem; color: var(--text-dim); margin-bottom: 32px;
+    }
+    .hero-links {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 40px;
+    }
+    .hero-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 16px;
+      font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .hero-link:hover {
+      border-color: var(--accent); color: var(--text);
+      background: var(--bg3); transform: translateY(-1px);
+    }
+    .hero-link .icon { font-size: 1rem; }
+
+    /* ===== Stats ===== */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px; margin-bottom: 48px;
+    }
+    .stat-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      text-align: center; transition: all 0.2s;
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .stat-value {
+      font-size: 1.6rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+    .stat-label-cn { font-size: 0.72rem; color: var(--text-dim); }
+
+    /* ===== Section ===== */
+    .section { margin-bottom: 56px; }
+    .section-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon { font-size: 1.3rem; }
+    .section-title { font-size: 1.15rem; font-weight: 700; }
+    .section-title-cn { font-size: 0.85rem; color: var(--text-dim); margin-left: 4px; }
+    .section-count {
+      margin-left: auto;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2px 10px;
+      font-size: 0.75rem; color: var(--text-muted);
+    }
+
+    /* ===== Filter Tabs ===== */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 32px;
+    }
+    .filter-btn {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 7px 16px;
+      font-size: 0.82rem; font-weight: 500; color: var(--text-muted);
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ===== Search ===== */
+    .search-wrap { margin-bottom: 28px; }
+    .search-input {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 16px 12px 44px;
+      font-size: 0.9rem; color: var(--text); outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-wrap { position: relative; }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); color: var(--text-dim); pointer-events: none;
+    }
+
+    /* ===== Resource Cards (Official) ===== */
+    .resource-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .resource-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: all 0.25s; cursor: default;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .resource-card:hover {
+      border-color: var(--accent); background: var(--card-hover);
+      transform: translateY(-3px); box-shadow: var(--shadow);
+    }
+    .resource-card-top { display: flex; align-items: flex-start; gap: 12px; }
+    .resource-card-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .resource-card-meta { flex: 1; }
+    .resource-card-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+    .resource-card-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; }
+    .resource-card-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.78rem; font-weight: 500; color: var(--accent3);
+      margin-top: auto; padding-top: 4px;
+    }
+    .resource-card-link:hover { color: #67e8f9; }
+
+    /* ===== Media Entry List ===== */
+    .media-list { display: flex; flex-direction: column; gap: 12px; }
+    .media-entry {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: all 0.2s; text-decoration: none; color: inherit;
+    }
+    .media-entry:hover {
+      border-color: var(--accent); background: var(--card-hover);
+      transform: translateX(4px);
+    }
+    .media-entry-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; margin-top: 2px;
+    }
+    .media-entry-body { flex: 1; min-width: 0; }
+    .media-entry-title {
+      font-size: 0.93rem; font-weight: 600; color: var(--text);
+      margin-bottom: 5px; line-height: 1.4;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .media-entry-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    }
+    .media-source { font-size: 0.76rem; color: var(--text-muted); font-weight: 500; }
+    .media-date { font-size: 0.74rem; color: var(--text-dim); }
+    .media-arrow {
+      font-size: 1.1rem; color: var(--text-dim); flex-shrink: 0;
+      transition: transform 0.2s; margin-top: 8px;
+    }
+    .media-entry:hover .media-arrow { transform: translateX(3px); color: var(--accent3); }
+
+    /* ===== Tags ===== */
+    .tag {
+      display: inline-flex; align-items: center;
+      border-radius: 6px; padding: 2px 8px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .tag-paper { background: rgba(99,102,241,0.2); color: #818cf8; }
+    .tag-model { background: rgba(16,185,129,0.2); color: #34d399; }
+    .tag-dataset { background: rgba(6,182,212,0.2); color: #22d3ee; }
+    .tag-bench { background: rgba(245,158,11,0.2); color: #fbbf24; }
+    .tag-official { background: rgba(139,92,246,0.2); color: #a78bfa; }
+    .tag-en { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .tag-cn { background: rgba(239,68,68,0.15); color: #f87171; }
+    .tag-community { background: rgba(249,115,22,0.15); color: #fb923c; }
+    .tag-social { background: rgba(236,72,153,0.15); color: #f472b6; }
+    .tag-hot { background: linear-gradient(135deg,rgba(245,158,11,0.3),rgba(249,115,22,0.3)); color: #fbbf24; }
+
+    /* ===== Leaderboard ===== */
+    .lb-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+    .lb-table th {
+      text-align: left; font-size: 0.75rem; font-weight: 600;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 8px 16px;
+    }
+    .lb-table td {
+      padding: 14px 16px; background: var(--bg2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .lb-table td:first-child { border-left: 1px solid var(--border); border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+    .lb-table td:last-child { border-right: 1px solid var(--border); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .lb-rank { font-weight: 700; font-size: 1rem; width: 50px; }
+    .lb-model { font-weight: 600; }
+    .lb-score {
+      font-weight: 800; font-size: 1.05rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .lb-score-human { -webkit-text-fill-color: var(--gold); color: var(--gold); }
+    .lb-bar-wrap { width: 120px; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+    .lb-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.8s ease; }
+    .lb-bar-human { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+    .lb-type { font-size: 0.75rem; }
+
+    /* ===== Domains ===== */
+    .domains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .domain-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px 18px;
+      transition: all 0.2s;
+    }
+    .domain-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .domain-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .domain-name { font-size: 0.88rem; font-weight: 700; }
+    .domain-name-cn { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0; text-align: center;
+      color: var(--text-dim); font-size: 0.82rem;
+    }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent3); }
+
+    /* ===== Divider ===== */
+    .divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .hero { padding: 48px 0 32px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .resource-grid { grid-template-columns: 1fr; }
+      .media-entry-title { white-space: normal; }
+      .lb-bar-wrap { display: none; }
+      .lb-table th:nth-child(4), .lb-table td:nth-child(4) { display: none; }
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeUp 0.4s ease forwards; }
+
+    /* ===== Subcategory Header ===== */
+    .subcat-header {
+      padding: 18px 0 8px; font-size: 0.78rem; font-weight: 700;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em;
+      border-bottom: 1px dashed var(--border); margin-bottom: 4px;
+    }
+
+    /* ===== Hidden for filter ===== */
+    .media-entry.hidden { display: none; }
+    .no-results {
+      text-align: center; padding: 40px;
+      color: var(--text-dim); font-size: 0.9rem; display: none;
+    }
+    .no-results.show { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-brand">
+        <div class="logo-icon">🎬</div>
+        <span>Awesome VBVR</span>
+      </div>
+      <div class="navbar-actions">
+        <a href="https://arxiv.org/abs/2602.20159" target="_blank" class="theme-toggle">📄 Paper</a>
+        <a href="https://video-reason.com" target="_blank" class="theme-toggle">🌐 Website</a>
+        <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">🏅 HuggingFace #1 Paper of the Month · Feb 2026</div>
+      <h1>Awesome VBVR</h1>
+      <p class="hero-subtitle">Media Coverage & Resources — <em>A Very Big Video Reasoning Suite</em></p>
+      <p class="hero-subtitle-cn">视频推理超级套件 · 媒体报道与资源全收录</p>
+      <div class="hero-links">
+        <a href="https://arxiv.org/abs/2602.20159" target="_blank" class="hero-link"><span class="icon">📄</span> arXiv Paper</a>
+        <a href="https://huggingface.co/papers/2602.20159" target="_blank" class="hero-link"><span class="icon">🤗</span> HuggingFace</a>
+        <a href="https://video-reason.com" target="_blank" class="hero-link"><span class="icon">🌐</span> Website</a>
+        <a href="https://huggingface.co/Video-Reason/VBVR-Wan2.2" target="_blank" class="hero-link"><span class="icon">🤖</span> VBVR-Wan2.2</a>
+        <a href="https://huggingface.co/datasets/Video-Reason/VBVR-Dataset" target="_blank" class="hero-link"><span class="icon">📦</span> Dataset</a>
+        <a href="https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard" target="_blank" class="hero-link"><span class="icon">🏆</span> Leaderboard</a>
+        <a href="https://github.com/VBVR-DataFactory" target="_blank" class="hero-link"><span class="icon">💻</span> GitHub</a>
+        <a href="https://join.slack.com/t/video-reason/shared_invite/zt-3qqf23icm-UC29fatWWYsIuzRNBR1lgg" target="_blank" class="hero-link"><span class="icon">💬</span> Slack</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">1M+</div>
+          <div class="stat-label">Video Clips</div>
+          <div class="stat-label-cn">视频片段</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">200</div>
+          <div class="stat-label">Reasoning Tasks</div>
+          <div class="stat-label-cn">推理任务</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">68.5%</div>
+          <div class="stat-label">Best Open Score</div>
+          <div class="stat-label-cn">开源最强成绩</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">500</div>
+          <div class="stat-label">Benchmark Samples</div>
+          <div class="stat-label-cn">基准测试样本</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100+</div>
+          <div class="stat-label">Rule-based Scorers</div>
+          <div class="stat-label-cn">规则评估器</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~370GB</div>
+          <div class="stat-label">Dataset Size</div>
+          <div class="stat-label-cn">数据集大小</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- ===== FILTER + SEARCH ===== -->
+      <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterMedia('all', this)">🌍 All · 全部</button>
+      <button class="filter-btn" onclick="filterMedia('official', this)">📄 Official · 官方</button>
+      <button class="filter-btn" onclick="filterMedia('en', this)">🇺🇸 English Media</button>
+      <button class="filter-btn" onclick="filterMedia('cn', this)">🇨🇳 中文媒体</button>
+      <button class="filter-btn" onclick="filterMedia('wechat', this)">💬 微信公众号</button>
+      <button class="filter-btn" onclick="filterMedia('bilibili', this)">📺 Bilibili</button>
+      <button class="filter-btn" onclick="filterMedia('xhs', this)">📕 小红书</button>
+      <button class="filter-btn" onclick="filterMedia('youtube', this)">🎬 YouTube</button>
+      <button class="filter-btn" onclick="filterMedia('linkedin', this)">💼 LinkedIn</button>
+      <button class="filter-btn" onclick="filterMedia('twitter', this)">🐦 X / Twitter</button>
+      <button class="filter-btn" onclick="filterMedia('community', this)">🤗 Community · 社区</button>
+    </div>
+
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" id="searchInput" placeholder="Search titles, sources... / 搜索标题、来源..." oninput="searchMedia()" />
+    </div>
+
+    <!-- ===== SECTION 1: OFFICIAL RESOURCES ===== -->
+    <section class="section" id="sec-official">
+      <div class="section-header">
+        <span class="section-icon">📄</span>
+        <span class="section-title">Official Resources</span>
+        <span class="section-title-cn">官方资源</span>
+        <span class="section-count">9 items</span>
+      </div>
+      <div class="resource-grid">
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(239,68,68,0.15)">📄</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">Paper — arXiv:2602.20159</div>
+              <div class="resource-card-desc">Full PDF · <em>A Very Big Video Reasoning Suite</em></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-paper">Paper</span>
+            <span class="tag tag-hot">🔥 #1 of Month</span>
+          </div>
+          <a href="https://arxiv.org/abs/2602.20159" target="_blank" class="resource-card-link">Read Paper →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(99,102,241,0.15)">📄</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">Paper — HTML Version</div>
+              <div class="resource-card-desc">Readable HTML format on arXiv</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-paper">Paper</span>
+            <span class="tag tag-en">EN</span>
+          </div>
+          <a href="https://arxiv.org/html/2602.20159" target="_blank" class="resource-card-link">Read HTML →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(245,158,11,0.15)">🤗</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">HuggingFace Paper Page</div>
+              <div class="resource-card-desc">Discussions, upvotes & community</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-official">Official</span>
+            <span class="tag tag-community">Community</span>
+          </div>
+          <a href="https://huggingface.co/papers/2602.20159" target="_blank" class="resource-card-link">View on HF →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(16,185,129,0.15)">🤖</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">VBVR-Wan2.2 Model</div>
+              <div class="resource-card-desc">Best open model · 68.5% on VBVR-Bench</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-model">Model</span>
+            <span class="tag tag-hot">🥇 Best Open</span>
+          </div>
+          <a href="https://huggingface.co/Video-Reason/VBVR-Wan2.2" target="_blank" class="resource-card-link">View Model →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(6,182,212,0.15)">📦</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">VBVR-Dataset</div>
+              <div class="resource-card-desc">1M+ videos · 200 tasks · ~370GB</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-dataset">Dataset</span>
+            <span class="tag tag-hot">1M+ clips</span>
+          </div>
+          <a href="https://huggingface.co/datasets/Video-Reason/VBVR-Dataset" target="_blank" class="resource-card-link">Browse Dataset →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(245,158,11,0.15)">📊</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">VBVR-Bench-Data</div>
+              <div class="resource-card-desc">500-sample test set · 100+ rule scorers</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-bench">Benchmark</span>
+            <span class="tag tag-dataset">Dataset</span>
+          </div>
+          <a href="https://huggingface.co/datasets/Video-Reason/VBVR-Bench-Data" target="_blank" class="resource-card-link">View Benchmark →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(236,72,153,0.15)">🎬</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">video-mcp Dataset</div>
+              <div class="resource-card-desc">3.9k reasoning clips · 20.8k ⭐</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-dataset">Dataset</span>
+            <span class="tag tag-hot">20.8k ⭐</span>
+          </div>
+          <a href="https://huggingface.co/datasets/Video-Reason/video-mcp" target="_blank" class="resource-card-link">Browse Dataset →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(245,158,11,0.15)">🏆</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">VBVR-Bench Leaderboard</div>
+              <div class="resource-card-desc">Public ranking for video reasoning models</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-bench">Leaderboard</span>
+            <span class="tag tag-official">Official</span>
+          </div>
+          <a href="https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard" target="_blank" class="resource-card-link">View Leaderboard →</a>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-card-top">
+            <div class="resource-card-icon" style="background:rgba(139,92,246,0.15)">🌐</div>
+            <div class="resource-card-meta">
+              <div class="resource-card-name">Official Website</div>
+              <div class="resource-card-desc">video-reason.com — models, bench, team</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag tag-official">Official</span>
+          </div>
+          <a href="https://video-reason.com" target="_blank" class="resource-card-link">Visit Website →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== SECTION 2: MEDIA COVERAGE ===== -->
+    <section class="section" id="sec-media">
+      <div class="section-header">
+        <span class="section-icon">📰</span>
+        <span class="section-title">Media Coverage & Discussions</span>
+        <span class="section-title-cn">媒体报道与社区讨论</span>
+        <span class="section-count">101+ entries</span>
+      </div>
+
+      <div class="media-list" id="mediaList">
+
+        <!-- ===== OFFICIAL & ENGLISH MEDIA ===== -->
+        <div class="subcat-header">🇺🇸 English Media & Academic · 英文媒体与学术</div>
+
+        <a href="https://huggingface.co/papers/2602.20159" target="_blank" class="media-entry" data-cat="en official community">
+          <div class="media-entry-icon" style="background:rgba(245,158,11,0.15)">🤗</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — HuggingFace Paper Page</div>
+            <div class="media-entry-meta"><span class="media-source">HuggingFace Daily Papers</span><span class="tag tag-en">EN</span><span class="tag tag-paper">Paper</span><span class="tag tag-hot">🏅 #1 of Month</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://huggingface.co/papers/month/2026-02" target="_blank" class="media-entry" data-cat="en official community">
+          <div class="media-entry-icon" style="background:rgba(245,158,11,0.15)">🤗</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">HuggingFace Papers of the Month — February 2026</div>
+            <div class="media-entry-meta"><span class="media-source">HuggingFace</span><span class="tag tag-en">EN</span><span class="tag tag-hot">🏅 #1 of Month</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://arxiv.org/abs/2602.20159" target="_blank" class="media-entry" data-cat="en official">
+          <div class="media-entry-icon" style="background:rgba(239,68,68,0.15)">📄</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — arXiv Preprint (2602.20159)</div>
+            <div class="media-entry-meta"><span class="media-source">arXiv</span><span class="tag tag-en">EN</span><span class="tag tag-paper">Paper</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://arxiv.org/html/2602.20159" target="_blank" class="media-entry" data-cat="en official">
+          <div class="media-entry-icon" style="background:rgba(239,68,68,0.15)">📄</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — arXiv HTML Full Text</div>
+            <div class="media-entry-meta"><span class="media-source">arXiv HTML</span><span class="tag tag-en">EN</span><span class="tag tag-paper">Paper</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://the-decoder.com/video-ai-models-hit-a-reasoning-ceiling-that-more-training-data-alone-wont-fix-researchers-say/" target="_blank" class="media-entry" data-cat="en">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">📰</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">Video AI Models Hit a Reasoning Ceiling That More Training Data Alone Won't Fix</div>
+            <div class="media-entry-meta"><span class="media-source">The Decoder</span><span class="tag tag-en">EN</span><span class="tag tag-paper">Article</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.emergentmind.com/papers/2602.20159" target="_blank" class="media-entry" data-cat="en community">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">🧠</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR Paper Discussion — EmergentMind Community</div>
+            <div class="media-entry-meta"><span class="media-source">EmergentMind</span><span class="tag tag-en">EN</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.emergentmind.com/videos/vbvr-scalable-video-reasoning-benchmark-962daa2d" target="_blank" class="media-entry" data-cat="en community">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">🧠</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR: Scalable Video Reasoning Benchmark — EmergentMind Video</div>
+            <div class="media-entry-meta"><span class="media-source">EmergentMind</span><span class="tag tag-en">EN</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://alanhou.org/blog/arxiv-a-very-big-video-reasoning-suite/" target="_blank" class="media-entry" data-cat="en">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">✍️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">arXiv: A Very Big Video Reasoning Suite — Blog Summary</div>
+            <div class="media-entry-meta"><span class="media-source">alanhou.org</span><span class="tag tag-en">EN</span><span class="tag tag-paper">Blog</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://hyper.ai/en/papers/2602.20159" target="_blank" class="media-entry" data-cat="en community">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">🔬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — HyperAI Paper Page</div>
+            <div class="media-entry-meta"><span class="media-source">hyper.ai</span><span class="tag tag-en">EN</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.alphaxiv.org/abs/2602.20159" target="_blank" class="media-entry" data-cat="en community">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">🔬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — alphaXiv Discussion</div>
+            <div class="media-entry-meta"><span class="media-source">alphaXiv</span><span class="tag tag-en">EN</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://openart.ai/workflows/sheep_determined_81/a-very-big-video-reasoning-suite/3djfbRQDPFVoEKBRc2Cq" target="_blank" class="media-entry" data-cat="en community">
+          <div class="media-entry-icon" style="background:rgba(99,102,241,0.15)">🎨</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — OpenArt Workflow</div>
+            <div class="media-entry-meta"><span class="media-source">OpenArt</span><span class="tag tag-en">EN</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.facebook.com/groups/3928385267460239/posts/4004339046531527/" target="_blank" class="media-entry" data-cat="en community">
+          <div class="media-entry-icon" style="background:rgba(24,119,242,0.15)">📘</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR Discussion — Facebook Group Post</div>
+            <div class="media-entry-meta"><span class="media-source">Facebook</span><span class="tag tag-en">EN</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://huggingface.co/Video-Reason/VBVR-Wan2.2" target="_blank" class="media-entry" data-cat="en official">
+          <div class="media-entry-icon" style="background:rgba(16,185,129,0.15)">🤖</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR-Wan2.2 Model Card — Finetuned from Wan2.2-I2V-A14B (68.5% on VBVR-Bench)</div>
+            <div class="media-entry-meta"><span class="media-source">HuggingFace</span><span class="tag tag-en">EN</span><span class="tag tag-model">Model</span><span class="tag tag-hot">🥇 Best Open</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://hub.baai.ac.cn/paper/2b253656-c3d0-41b4-881f-93597d89e69b" target="_blank" class="media-entry" data-cat="cn community">
+          <div class="media-entry-icon" style="background:rgba(239,68,68,0.15)">🏛️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">A Very Big Video Reasoning Suite — 北京智源 BAAI 论文页</div>
+            <div class="media-entry-meta"><span class="media-source">hub.baai.ac.cn · 北京智源</span><span class="tag tag-cn">中文</span><span class="tag tag-community">Community</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== YOUTUBE ===== -->
+        <div class="subcat-header">🎬 YouTube · 视频报道</div>
+
+        <a href="https://www.youtube.com/watch?v=kOIgD5yVsC0" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #1</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=MhuiVJxYqOE" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #2</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=BI5xIKkn7oE" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #3</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=xSoD2GrbJ4U" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #4</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=NPELmHsmcfk" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #5</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=sWxEGsbLhlA" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #6</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=k8kxKGCsb6Q" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #7</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=c6UUvgdPuxk" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #8</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=GTXvnTx4upI" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #9</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=d3FCAf7iDw0" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #10</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=8grIT-xK50M" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #11</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=NVTgq-deLo0" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #12</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=R8cjjglkfiM" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #13</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=b84ydwPVf8s" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #14</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=RlWPs8SALLw" target="_blank" class="media-entry" data-cat="youtube en">
+          <div class="media-entry-icon" style="background:rgba(255,0,0,0.12)">▶️</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">YouTube Video — VBVR Coverage #15</div>
+            <div class="media-entry-meta"><span class="media-source">YouTube</span><span class="tag tag-en">EN</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== LINKEDIN ===== -->
+        <div class="subcat-header">💼 LinkedIn · 职业社交讨论</div>
+
+        <a href="https://www.linkedin.com/posts/grury_comfyui-ugcPost-7434195846734204928-bwhN" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — VBVR Discussion #1 (ComfyUI related)</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/encryptedpedro_paper-page-a-very-big-video-reasoning-suite-share-7432387826781941762-4dmx" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — Paper Page: A Very Big Video Reasoning Suite</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @encryptedpedro</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/luka-tisler_video-reason-with-wan-22-this-shows-a-activity-7432332371242360832-BIm9/" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — Video Reason with Wan 2.2</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @luka-tisler</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/feed/update/urn:li:groupPost:3746827-7433802770148876289" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Group Post — VBVR Discussion #4</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn Group</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/kartikmat_a-very-big-video-reasoning-suite-share-7433052162475319297-xSWP" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — A Very Big Video Reasoning Suite</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @kartikmat</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/nishantha-ruwan-15b301b2_a-very-big-video-reasoning-suite-share-7432144838239694849-1_J3" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — A Very Big Video Reasoning Suite</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @nishantha-ruwan</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/feed/update/urn:li:groupPost:961087-7434436011146973184" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Group Post — VBVR Discussion #7</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn Group</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/garryosborne_the-ai-morning-read-february-24-2026-from-share-7432025079770791936-07Xg" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — The AI Morning Read: February 24, 2026</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @garryosborne</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/suwoongsik_ai-ugcPost-7434586352983162880-mXzF" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — AI / VBVR Discussion</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @suwoongsik</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/jerilkuriakose_videoreasoning-airesearch-computervision-share-7432089743170883585-hLRr" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — #VideoReasoning #AIResearch #ComputerVision</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @jerilkuriakose</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/mohamed-ben-adda_video-models-have-become-visually-impressive-share-7434436706722013184-QQiU" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — "Video models have become visually impressive..."</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @mohamed-ben-adda</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/hokin-deng-b3b160187_i-am-so-glad-that-the-community-is-already-ugcPost-7434700953104330753-DGO1" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — Hokin Deng (Author): "I am so glad that the community is already..."</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @hokin-deng (Author)</span><span class="tag tag-en">EN</span><span class="tag tag-hot">👤 Author</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/minta-carlson-1733b2368_56-researchers-across-32-institutions-built-share-7434156649252036608-T0bo" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — "56 researchers across 32 institutions built..."</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @minta-carlson</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/hazaneric_vbvrteser-share-7433801134131163136-iJ3r" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — #VBVRTeser Discussion</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @hazaneric</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/top-3-research-paper-of-the-week-ugcPost-7434098523408867328-0UOm" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — Top 3 Research Paper of the Week (VBVR featured)</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn</span><span class="tag tag-en">EN</span><span class="tag tag-hot">🏅 Top 3</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/daily-papers-ab213b360_video-reasoning-has-been-the-missing-piece-share-7431975903187861504-7s2_" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — Daily Papers: "Video reasoning has been the missing piece..."</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · Daily Papers</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/augment3dink_a-recent-research-project-called-a-very-share-7436040909231661056-pnay" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — "A recent research project called A Very..."</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @augment3dink</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/adding-reasoning-to-wan-22-video-generation-share-7434054867372957696-d4eE" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn — Adding Reasoning to Wan 2.2 Video Generation</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn</span><span class="tag tag-en">EN</span><span class="tag tag-model">Model</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/aloth_ai-machinelearning-computervision-share-7432142504453357569-59dp" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — #AI #MachineLearning #ComputerVision</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @aloth</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/story-share-7434020056134754304-u2mj" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — VBVR Story</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.linkedin.com/posts/rakeshdwivedi_ai-videoreasoning-computervision-share-7433994207922540545-GuBe" target="_blank" class="media-entry" data-cat="linkedin en">
+          <div class="media-entry-icon" style="background:rgba(10,102,194,0.15)">💼</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">LinkedIn Post — #AI #VideoReasoning #ComputerVision</div>
+            <div class="media-entry-meta"><span class="media-source">LinkedIn · @rakeshdwivedi</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== X / TWITTER ===== -->
+        <div class="subcat-header">🐦 X / Twitter · 推文讨论</div>
+
+        <a href="https://x.com/du_yilun/status/2026342030717206817" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @du_yilun (Author)</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @du_yilun</span><span class="tag tag-en">EN</span><span class="tag tag-hot">👤 Author</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/AiquestAcademy/status/2026160523633410263" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @AiquestAcademy</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @AiquestAcademy</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/wildmindai/status/2025546636529680797" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @wildmindai</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @wildmindai</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/HuggingPapers/status/2026210226601373706" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @HuggingPapers (Official HF Papers Account)</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @HuggingPapers</span><span class="tag tag-en">EN</span><span class="tag tag-hot">🤗 HF Official</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/HuggingModels/status/2027391186521190785" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @HuggingModels (VBVR-Wan2.2 release)</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @HuggingModels</span><span class="tag tag-en">EN</span><span class="tag tag-model">Model</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/Adhiguna_AIaaS/status/2028813347169440040" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @Adhiguna_AIaaS</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @Adhiguna_AIaaS</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/heynavtoor/status/2027980299804807655" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @heynavtoor</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @heynavtoor</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/MartinSzerment/status/2028407175085707276" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @MartinSzerment</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @MartinSzerment</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/rohanpaul_ai/status/2028271766884474978" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @rohanpaul_ai</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @rohanpaul_ai</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/_akhaliq/status/2026317205168595090" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @_akhaliq (AI Papers Curator)</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @_akhaliq</span><span class="tag tag-en">EN</span><span class="tag tag-hot">📌 Curator</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/socialwithaayan/status/2029234861857464541" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @socialwithaayan</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @socialwithaayan</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://x.com/TheAITimeline/status/2027825358540513362" target="_blank" class="media-entry" data-cat="twitter en">
+          <div class="media-entry-icon" style="background:rgba(0,0,0,0.2)">𝕏</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">X Post — @TheAITimeline</div>
+            <div class="media-entry-meta"><span class="media-source">X / Twitter · @TheAITimeline</span><span class="tag tag-en">EN</span><span class="tag tag-social">Social</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== BILIBILI ===== -->
+        <div class="subcat-header">📺 Bilibili · B站视频报道</div>
+
+        <a href="https://www.bilibili.com/video/BV1cwfUBpESf/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #1</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1bNf1BXEc6/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #2</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1PFfxBxET9/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #3</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1REArzwEoW/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #4</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1aJPezGED8/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #5</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1vgPCzgEp3/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #6</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1vKNPzYEWF/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #7</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV147PjzSEkD/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #8</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1nAA8zCEUC/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #9</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1vNPEziECQ/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #10</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1hbAazeEQL/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #11</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV11ofsB4EFb/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #12</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1iqPNzTEfP/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #13</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1NwP7zSE9q/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #14</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1fKP1zSEw3/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #15</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://www.bilibili.com/video/BV1xPPMz4Eo7/" target="_blank" class="media-entry" data-cat="bilibili cn">
+          <div class="media-entry-icon" style="background:rgba(0,161,214,0.15)">📺</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">B站视频 — VBVR 相关报道 #16</div>
+            <div class="media-entry-meta"><span class="media-source">Bilibili</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== WECHAT ===== -->
+        <div class="subcat-header">💬 微信公众号 · WeChat Articles</div>
+
+        <a href="https://mp.weixin.qq.com/s/mMdQQtEb8yvH7QVW2iKDlA" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #1</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/p10jJVKb168MGeoSnKRMsA" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #2</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/aYb32xLHvk2LfA_s28crdg" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #3</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/SzhtFH2LhbvNx9d8-3jNKQ" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #4</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/AzLffnqVnMu5u80htojsZA" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #5</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/M6ONtPGsrSWOiI-4pFGFqQ" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #6</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/b_P2hlj4p0hy73XyvXo7LQ" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #7</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/mmCAU_t5tiHi74fmcRhB7A" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #8</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/q-jmRw-9wBz7VK7LFCbQvw" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #9</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/A5DcHo2MgWB6WIFfH_4qdA" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #10</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/GTSTzTv_HrKssBfBCetnhw" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #11</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/vv0w23DoiLx2Ti_2GBfqgQ" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #12</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/N4OqAMFyQ_CfIF6N_GlOPw" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #13</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/cFNYiQpIRPI8VkFfQzaiJw" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #14</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/v1OdBb2jwBgR68zfO1zTTg" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #15</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/0z4ErdWSgF0-LkSAQYTT1A" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #16</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://mp.weixin.qq.com/s/F0N0SaZmtHD-ILx00LFjmg" target="_blank" class="media-entry" data-cat="wechat cn">
+          <div class="media-entry-icon" style="background:rgba(7,193,96,0.15)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">微信公众号文章 — VBVR 相关报道 #17</div>
+            <div class="media-entry-meta"><span class="media-source">微信公众号</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== XIAOHONGSHU ===== -->
+        <div class="subcat-header">📕 小红书 · Xiaohongshu Notes</div>
+
+        <a href="http://xhslink.com/o/1NqyIvP5EIA" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #1</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/6yLfugHWiUP" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #2</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/8tqJHk7UcDQ" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #3</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/6epAVtTV2Tf" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #4</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/5NzhGAggxe5" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #5</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/5thsu8gDTt2" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #6</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/1tChXjjrkRo" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #7</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/1bLKvOT6pHO" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #8</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/13IKJNAxSvv" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #9</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/4svlRE2K8va" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #10</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/KXWAEDYLk2" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #11</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/9QcLpIEWw7x" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #12</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="http://xhslink.com/o/bz7v2V057h" target="_blank" class="media-entry" data-cat="xhs cn">
+          <div class="media-entry-icon" style="background:rgba(255,42,70,0.15)">📕</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">小红书笔记 — VBVR 相关内容 #13</div>
+            <div class="media-entry-meta"><span class="media-source">小红书</span><span class="tag tag-cn">中文</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <!-- ===== HF COMMUNITY ===== -->
+        <div class="subcat-header">🤗 HuggingFace Community · 社区讨论</div>
+
+        <a href="https://huggingface.co/Video-Reason/VBVR-Wan2.2/discussions" target="_blank" class="media-entry" data-cat="community en">
+          <div class="media-entry-icon" style="background:rgba(245,158,11,0.15)">🤗</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR-Wan2.2 Model Discussions — Q&A, Usage, Feedback</div>
+            <div class="media-entry-meta"><span class="media-source">HuggingFace Discussions</span><span class="tag tag-en">EN</span><span class="tag tag-model">Model</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard" target="_blank" class="media-entry" data-cat="community official en">
+          <div class="media-entry-icon" style="background:rgba(245,158,11,0.15)">🏆</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR-Bench Public Leaderboard — Submit & Compare Models</div>
+            <div class="media-entry-meta"><span class="media-source">HuggingFace Spaces</span><span class="tag tag-en">EN</span><span class="tag tag-bench">Leaderboard</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://join.slack.com/t/video-reason/shared_invite/zt-3qqf23icm-UC29fatWWYsIuzRNBR1lgg" target="_blank" class="media-entry" data-cat="community official en">
+          <div class="media-entry-icon" style="background:rgba(74,21,75,0.3)">💬</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">Video-Reason Official Slack Community — Join the Discussion</div>
+            <div class="media-entry-meta"><span class="media-source">Slack</span><span class="tag tag-en">EN</span><span class="tag tag-official">Official</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+        <a href="https://github.com/VBVR-DataFactory" target="_blank" class="media-entry" data-cat="community official en">
+          <div class="media-entry-icon" style="background:rgba(100,100,100,0.2)">💻</div>
+          <div class="media-entry-body">
+            <div class="media-entry-title">VBVR-DataFactory GitHub Organization — Code, Issues, Discussions</div>
+            <div class="media-entry-meta"><span class="media-source">GitHub</span><span class="tag tag-en">EN</span><span class="tag tag-official">Official</span></div>
+          </div><div class="media-arrow">→</div>
+        </a>
+
+      </div>
+
+      <p class="no-results" id="noResults">No results found. Try a different keyword. / 没有找到相关结果，请尝试其他关键词。</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== SECTION 3: LEADERBOARD ===== -->
+    <section class="section" id="sec-leaderboard">
+      <div class="section-header">
+        <span class="section-icon">🏆</span>
+        <span class="section-title">VBVR-Bench Leaderboard</span>
+        <span class="section-title-cn">性能排行榜</span>
+        <span class="section-count">as of Mar 2026</span>
+      </div>
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Model</th>
+            <th>Score</th>
+            <th>Progress</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lb-rank">👤</td>
+            <td class="lb-model">Human Baseline <span class="tag tag-hot" style="margin-left:6px">Reference</span></td>
+            <td><span class="lb-score lb-score-human">97.4%</span></td>
+            <td><div class="lb-bar-wrap"><div class="lb-bar lb-bar-human" style="width:97.4%"></div></div></td>
+            <td><span class="lb-type" style="color:var(--gold)">Human</span></td>
+          </tr>
+          <tr>
+            <td class="lb-rank">🥇</td>
+            <td class="lb-model"><a href="https://huggingface.co/Video-Reason/VBVR-Wan2.2" target="_blank">VBVR-Wan2.2</a> <span class="tag tag-model" style="margin-left:6px">Open Source</span></td>
+            <td><span class="lb-score">68.5%</span></td>
+            <td><div class="lb-bar-wrap"><div class="lb-bar" style="width:68.5%"></div></div></td>
+            <td><span class="lb-type" style="color:var(--green)">Open Source</span></td>
+          </tr>
+          <tr>
+            <td class="lb-rank">🥈</td>
+            <td class="lb-model">Sora 2</td>
+            <td><span class="lb-score">54.6%</span></td>
+            <td><div class="lb-bar-wrap"><div class="lb-bar" style="width:54.6%;background:linear-gradient(90deg,#64748b,#94a3b8)"></div></div></td>
+            <td><span class="lb-type" style="color:var(--text-muted)">Commercial</span></td>
+          </tr>
+          <tr>
+            <td class="lb-rank">🥉</td>
+            <td class="lb-model">Veo 3.1</td>
+            <td><span class="lb-score">48.0%</span></td>
+            <td><div class="lb-bar-wrap"><div class="lb-bar" style="width:48%;background:linear-gradient(90deg,#64748b,#94a3b8)"></div></div></td>
+            <td><span class="lb-type" style="color:var(--text-muted)">Commercial</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:14px;text-align:right;">
+        <a href="https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard" target="_blank" style="font-size:0.82rem;color:var(--accent3)">View full leaderboard →</a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== SECTION 4: DOMAINS ===== -->
+    <section class="section" id="sec-domains">
+      <div class="section-header">
+        <span class="section-icon">🧩</span>
+        <span class="section-title">Five Reasoning Domains</span>
+        <span class="section-title-cn">五大推理维度</span>
+      </div>
+      <div class="domains-grid">
+        <div class="domain-card">
+          <div class="domain-icon">👁️</div>
+          <div class="domain-name">Perception</div>
+          <div class="domain-name-cn">感知推理</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon">🧠</div>
+          <div class="domain-name">Abstraction</div>
+          <div class="domain-name-cn">抽象推理</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon">📐</div>
+          <div class="domain-name">Spatiality</div>
+          <div class="domain-name-cn">空间推理</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon">🔄</div>
+          <div class="domain-name">Transformation</div>
+          <div class="domain-name-cn">变换推理</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon">📖</div>
+          <div class="domain-name">Knowledge</div>
+          <div class="domain-name-cn">知识推理</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== CITATION ===== -->
+    <section class="section" id="sec-cite">
+      <div class="section-header">
+        <span class="section-icon">📖</span>
+        <span class="section-title">Citation</span>
+        <span class="section-title-cn">引用</span>
+      </div>
+      <pre style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;overflow-x:auto;font-size:0.78rem;line-height:1.7;color:var(--text-muted);">@article{vbvr2026,
+  title   = {A Very Big Video Reasoning Suite},
+  author  = {Wang, Maijunxian and Wang, Ruisi and Lin, Juyi and Ji, Ran and
+             Wiedemer, Thadd{\"a}us and Gao, Qingying and Luo, Dezhi and
+             Qian, Yaoyao and Huang, Lianyu and Hong, Zelong and others},
+  journal = {arXiv preprint arXiv:2602.20159},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2602.20159}
+}</pre>
+    </section>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <p>
+        Made with ❤️ by the <a href="https://huggingface.co/Video-Reason" target="_blank">Video-Reason</a> team ·
+        <a href="https://arxiv.org/abs/2602.20159" target="_blank">Paper</a> ·
+        <a href="https://video-reason.com" target="_blank">Website</a> ·
+        <a href="mailto:hokinxqdeng@gmail.com">Contact</a>
+      </p>
+      <p style="margin-top:6px;font-size:0.75rem;">
+        To add a new media entry, open this file in a text editor and add a new <code>&lt;a&gt;</code> block following the existing pattern. / 如需添加新报道，在文本编辑器中打开此文件，仿照已有格式添加新条目。
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Theme Toggle =====
+    function toggleTheme() {
+      const isDark = !document.documentElement.hasAttribute('data-theme');
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.getElementById('theme-btn').textContent = '🌙 Dark';
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        document.getElementById('theme-btn').textContent = '☀️ Light';
+      }
+    }
+
+    // ===== Filter =====
+    function filterMedia(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const entries = document.querySelectorAll('.media-entry');
+      entries.forEach(e => {
+        const cats = (e.getAttribute('data-cat') || '').split(' ');
+        e.classList.toggle('hidden', cat !== 'all' && !cats.includes(cat));
+      });
+      checkNoResults();
+    }
+
+    // ===== Search =====
+    function searchMedia() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const entries = document.querySelectorAll('.media-entry');
+      entries.forEach(e => {
+        const text = e.textContent.toLowerCase();
+        if (q === '') {
+          e.classList.remove('hidden');
+        } else {
+          e.classList.toggle('hidden', !text.includes(q));
+        }
+      });
+      // reset filter buttons
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn').classList.add('active');
+      checkNoResults();
+    }
+
+    function checkNoResults() {
+      const visible = [...document.querySelectorAll('.media-entry')].filter(e => !e.classList.contains('hidden'));
+      document.getElementById('noResults').classList.toggle('show', visible.length === 0);
+    }
+
+    // ===== Animate leaderboard bars on load =====
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.lb-bar').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = w; }, 300);
+      });
+    });
+  </script>
+</body>
+</html>
