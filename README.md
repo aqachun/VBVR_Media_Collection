@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/VBVR-#1%20Paper%20of%20the%20Month-gold?style=for-the-badge&logo=huggingface" />
+<img src="https://img.shields.io/badge/VBVR-%231%20Paper%20of%20the%20Month-gold?style=for-the-badge&logo=huggingface" />
 <img src="https://img.shields.io/badge/arXiv-2602.20159-red?style=for-the-badge&logo=arxiv" />
 <img src="https://img.shields.io/badge/HuggingFace-Video--Reason-yellow?style=for-the-badge&logo=huggingface" />
 <img src="https://img.shields.io/badge/Dataset-1M%2B%20Videos-blue?style=for-the-badge" />
